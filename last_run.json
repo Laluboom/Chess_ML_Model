@@ -5,23 +5,23 @@
   "run_status": "API live-tested successfully (HTTP 200). Did not re-run Trial.py to avoid overwriting the existing PGN — run manually to refresh.",
   "syntax_check": "passed",
   "api_check": {
-    "endpoint": "https://api.chess.com/pub/player/laluboom/games/archives",
+    "endpoint": "https://api.chess.com/pub/player/<configured-user>/games/archives",
     "status": 200,
-    "archives_found": 19,
-    "latest_archive": "https://api.chess.com/pub/player/laluboom/games/2026/04"
+    "archives_found": "redacted",
+    "latest_archive": "redacted"
   },
   "dataset": {
-    "file": "laluboom_all_games.pgn",
-    "games": 932,
-    "lines": 23304,
-    "wins": 435,
-    "losses": 457,
-    "draws": 40,
-    "win_rate": "46.7%"
+    "file": "<configured-output>.pgn",
+    "games": "redacted",
+    "lines": "redacted",
+    "wins": "redacted",
+    "losses": "redacted",
+    "draws": "redacted",
+    "win_rate": "redacted"
   },
   "files_inspected": [
     "Trial.py",
-    "laluboom_all_games.pgn (head + stats)"
+    "local PGN export (head + stats)"
   ],
-  "notes": "Project is data-collection only. No ML model code exists. PGN is stale — missing archives up to April 2026."
+  "notes": "Project is data-collection only. No ML model code exists. Local PGN exports are ignored and should stay outside Git."
 }
