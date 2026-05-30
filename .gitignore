@@ -1,0 +1,43 @@
+# Python bytecode and caches
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Virtual environments and local dependency folders
+.venv/
+venv/
+env/
+ENV/
+
+# Environment files and local secrets
+.env
+.env.*
+!.env.example
+
+# Personal chess exports, models, and generated data
+*.pgn
+*.csv
+*.jsonl
+*.db
+*.sqlite
+*.sqlite3
+models/
+checkpoints/
+outputs/
+output/
+data/
+exports/
+tmp/
+temp/
+*.log
+
+# Editor, OS, and local workspace files
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+*.swo
