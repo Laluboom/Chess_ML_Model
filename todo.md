@@ -1,23 +1,17 @@
 # TODOs
 
-1. **Re-run `Trial.py` to refresh the PGN** — configure `.env` from `.env.example`, then run `python3 Trial.py` to pull the current game archive before building anything on top of the data.
+1. **Refresh the local PGN export before using the parser** — `Trial.py:61` builds and writes the archive file that `parse_pgn_features.py:91` reads, so re-run `python3 Trial.py` with a local `.env` first.
 
-2. **Add a PGN parser to extract ML features** — the raw PGN is not directly usable for ML. Use `python-chess` (`pip install chess`) to parse each game and extract structured features per game: opening ECO code, number of moves, material balance at various points, castling side, clock usage, blunder/inaccuracy counts (if clock data allows), and result. Write these to a CSV or dataframe so the data is model-ready.
+2. **Install the tracked parser dependencies in a project venv** — `requirements.txt:1` now lists `python-dotenv`, `requests`, and `python-chess`, but the current system interpreter here could not import `dotenv` or `chess` during this run.
 
-3. **Add a parser dependency when feature extraction starts** — `requests` and `python-dotenv` are tracked for collection. Add `python-chess` once PGN feature extraction code exists.
+3. **Extend the feature extractor with board-state features** — `parse_pgn_features.py:90` currently emits header-derived and game-level features only; add per-phase material or mobility metrics there once a sample PGN is available for validation.
 
----
+4. **Decide whether unknown-player games should fail fast** — `parse_pgn_features.py:105` currently keeps games where `CHESS_COM_USERNAME` does not match either side and marks them `target_color=unknown`; tighten that if mixed-account PGNs are not expected.
 
 ## Future Ideas
 
-4. **Win probability model by opening** — once PGN data is parsed, train a simple classifier (logistic regression or gradient boosting) to predict win/loss/draw probability by opening.
+5. **Train the first baseline model from the CSV output** — `parse_pgn_features.py:171` defines a clean per-game schema that is ready for a logistic-regression or gradient-boosting baseline once the CSV is generated.
 
-5. **Personal weakness detection** — parse clock usage and move quality across game phases (opening/middlegame/endgame). If you consistently lose on time or blunder in the endgame, that's a measurable pattern. Needs clock data from the PGN `{[%clk ...]}` annotations, which are already present in the file.
+6. **Add clock-time feature extraction instead of raw annotation counts** — `parse_pgn_features.py:61` only counts `[%clk ...]` annotations right now; parse those timestamps into usable time-pressure features when you have representative PGNs to test against.
 
-6. **Style fingerprinting** — extract features like average game length, pawn structure tendencies, exchange frequency, king safety metrics, and compare them across rating progression over time.
-
-7. **Opening recommendation engine** — given your win rates by ECO code and colour (White vs Black), build a small recommender that suggests which openings to study or drop. Could integrate with a chess opening database to pull suggested study lines. Open question: do you want this as a CLI tool or a simple web UI?
-
-8. **Opponent modelling** — the PGN has opponent usernames and Elos. Could cluster opponents by rating band and analyse which types of players you struggle against most, or detect if certain opponent playstyles (aggressive/positional) correlate with your losses.
-
-9. **Stockfish eval integration** — run games through Stockfish (local engine) to get centipawn loss per move and accuracy scores. This is the gold-standard feature set for chess ML and would make the model far more powerful than metadata alone. Computationally expensive for 932+ games but doable offline.
+7. **Integrate Stockfish analysis as a second-stage enrichment step** — keep the raw parser in `parse_pgn_features.py:90` focused on deterministic PGN features, then add engine evals in a separate script once local engine setup is confirmed.

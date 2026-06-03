@@ -1,27 +1,38 @@
 {
-  "date": "2026-05-29",
+  "date": "2026-06-03",
   "run_attempted": true,
   "run_succeeded": "partial",
-  "run_status": "API live-tested successfully (HTTP 200). Did not re-run Trial.py to avoid overwriting the existing PGN — run manually to refresh.",
-  "syntax_check": "passed",
-  "api_check": {
-    "endpoint": "https://api.chess.com/pub/player/<configured-user>/games/archives",
-    "status": 200,
-    "archives_found": "redacted",
-    "latest_archive": "redacted"
-  },
-  "dataset": {
-    "file": "<configured-output>.pgn",
-    "games": "redacted",
-    "lines": "redacted",
-    "wins": "redacted",
-    "losses": "redacted",
-    "draws": "redacted",
-    "win_rate": "redacted"
-  },
+  "run_status": "Added a standalone PGN-to-CSV feature extractor and updated project tracking. Did not run live collection or parsing because ignored PGN exports are not available in Git and python-dotenv / python-chess are not installed in the system interpreter here.",
+  "syntax_check": "passed — python3 -m py_compile Trial.py parse_pgn_features.py",
   "files_inspected": [
     "Trial.py",
-    "local PGN export (head + stats)"
+    "requirements.txt",
+    ".env.example",
+    "reference.md",
+    "todo.md",
+    "last_run.json"
   ],
-  "notes": "Project is data-collection only. No ML model code exists. Local PGN exports are ignored and should stay outside Git."
+  "files_changed": [
+    "parse_pgn_features.py",
+    "requirements.txt",
+    "reference.md",
+    "todo.md",
+    "last_run.json",
+    "cron_brief_latest.md"
+  ],
+  "issues_confirmed": [
+    "Trial.py:5 imports python-dotenv, but dotenv was not importable from the current system interpreter during this run",
+    "parse_pgn_features.py:9 requires python-chess, but chess was not importable from the current system interpreter during this run",
+    "insufficient evidence: no tracked PGN export exists in the repository, so parser output could not be executed or validated against real project data",
+    "git pull --ff-only failed against origin because local SSH config permissions blocked remote access in this environment"
+  ],
+  "git": {
+    "repo_present": true,
+    "pull_attempted": true,
+    "pull_result": "failed — SSH config permissions blocked remote access",
+    "push_attempted": false,
+    "push_result": "not attempted before commit"
+  },
+  "next_review": "2026-06-03",
+  "notes": "The project now has a checked-in feature extraction path, but the next useful run depends on a local venv with requirements installed and a fresh ignored PGN export generated from Trial.py."
 }
