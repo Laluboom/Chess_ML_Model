@@ -7,6 +7,7 @@ This run added `parse_pgn_features.py`, a standalone PGN-to-CSV extractor that t
 Verification completed:
 - `python3 -m py_compile Trial.py parse_pgn_features.py`
 - `git pull --ff-only` attempted and failed because the configured SSH remote is not accessible from this environment
+- `git push` attempted and failed with the same SSH config permission error
 
 Limitations from this run:
 - No tracked `.pgn` export exists in the repository, so the new parser could not be exercised against real project data.

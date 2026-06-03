@@ -30,8 +30,8 @@
     "repo_present": true,
     "pull_attempted": true,
     "pull_result": "failed — SSH config permissions blocked remote access",
-    "push_attempted": false,
-    "push_result": "not attempted before commit"
+    "push_attempted": true,
+    "push_result": "failed — SSH config permissions blocked remote access"
   },
   "next_review": "2026-06-03",
   "notes": "The project now has a checked-in feature extraction path, but the next useful run depends on a local venv with requirements installed and a fresh ignored PGN export generated from Trial.py."
